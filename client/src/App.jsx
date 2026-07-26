@@ -1,8 +1,8 @@
-import {Route, Routes} from "react-router-dom";
 import "./App.css";
+import {Route, Routes} from "react-router-dom";
 
 
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/layout/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Fitness from "./pages/Fitness";
 import Career from "./pages/Career";

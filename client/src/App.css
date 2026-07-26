@@ -23,10 +23,18 @@ a {
   font: inherit;
 }
 
+/* =========================
+   LAYOUT
+========================= */
+
 .app {
   display: flex;
   min-height: 100vh;
 }
+
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar {
   width: 250px;
@@ -47,13 +55,18 @@ a {
 }
 
 .navigation a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 12px 14px;
   border-radius: 10px;
   color: #cbd2c9;
   text-decoration: none;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
+  transition: all 0.2s ease;
+}
+
+.navigation a svg {
+  flex-shrink: 0;
 }
 
 .navigation a:hover,
@@ -62,10 +75,18 @@ a {
   color: white;
 }
 
+/* =========================
+   MAIN CONTENT
+========================= */
+
 .main-content {
   flex: 1;
   padding: 48px;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 .page-header {
   display: flex;
@@ -94,17 +115,25 @@ a {
 .profile-button {
   width: 48px;
   height: 48px;
-  border: 0;
+  border: none;
   border-radius: 50%;
   background-color: #7d9175;
   color: white;
-  font-weight: 700;
+  font-weight: bold;
   cursor: pointer;
 }
 
+.profile-button:hover {
+  background-color: #697c63;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
@@ -113,7 +142,7 @@ a {
   padding: 28px;
   border: 1px solid #dde2da;
   border-radius: 18px;
-  background-color: white;
+  background: white;
   box-shadow: 0 8px 24px rgba(32, 40, 32, 0.06);
 }
 
@@ -131,27 +160,285 @@ a {
   font-size: 22px;
 }
 
-.card > span:last-child {
+.card span {
   color: #747a72;
 }
 
 .card-button {
-  margin-top: 14px;
+  margin-top: 16px;
   padding: 10px 16px;
-  border: 0;
+  border: none;
   border-radius: 10px;
   background-color: #7d9175;
   color: white;
   cursor: pointer;
 }
 
-.card-button:hover,
-.profile-button:hover {
+.card-button:hover {
   background-color: #697c63;
 }
 
+/* =========================
+   FITNESS
+========================= */
+
+.fitness-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.fitness-header h1 {
+  margin: 4px 0 8px;
+  font-size: 36px;
+}
+
+.fitness-header p {
+  margin: 0;
+  color: #6b7169;
+}
+
+.primary-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #7d9175;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primary-button:hover {
+  background: #697c63;
+}
+
+.fitness-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.fitness-card {
+  padding: 28px;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid #dde2da;
+  box-shadow: 0 8px 24px rgba(32, 40, 32, 0.06);
+}
+
+.fitness-card-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #edf3e8;
+  color: #697c63;
+}
+
+.fitness-card p {
+  margin: 20px 0 8px;
+  color: #747a72;
+}
+
+.fitness-card h2 {
+  margin: 0 0 10px;
+  font-size: 26px;
+}
+
+.fitness-card span {
+  color: #747a72;
+}
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.progress {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+  color: #5f675d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: #e2e7df;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background-color: #7d9175;
+  transition: width 0.4s ease;
+}
+/* =========================
+   WORKOUT
+========================= */
+
+.workout-card {
+  grid-row: span 2;
+}
+
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.exercise-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e7df;
+  border-radius: 10px;
+  background-color: #f8faf7;
+  color: #343a32;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.exercise-item:hover {
+  border-color: #b9c4b5;
+  background-color: #f0f4ed;
+}
+
+.exercise-item.completed {
+  border-color: #c9d5c5;
+  background-color: #eaf0e7;
+  color: #697c63;
+}
+
+.exercise-item.completed span {
+  text-decoration: line-through;
+}
+
+.exercise-item svg {
+  flex-shrink: 0;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-header {
+  margin-bottom: 40px;
+}
+
+.settings-header h1 {
+  margin: 4px 0 8px;
+  font-size: 36px;
+}
+
+.settings-header p {
+  margin: 0;
+  color: #6b7169;
+}
+
+.settings-section {
+  max-width: 720px;
+  padding: 32px;
+  border: 1px solid #dde2da;
+  border-radius: 18px;
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(32, 40, 32, 0.06);
+}
+
+.settings-section-header {
+  margin-bottom: 28px;
+}
+
+.settings-section-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+
+.settings-section-header p {
+  margin: 0;
+  color: #747a72;
+}
+
+.settings-form {
+  display: grid;
+  gap: 22px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field > span {
+  color: #41483f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d8dfd5;
+  border-radius: 10px;
+  background-color: #fafbf9;
+  color: #20251f;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-field input:focus {
+  border-color: #7d9175;
+  box-shadow: 0 0 0 3px rgba(125, 145, 117, 0.15);
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.save-message {
+  margin: 0;
+  color: #586a53;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 850px) {
   .app {
+    flex-direction: column;
+  
+  }
+  .settings-section {
+    padding: 24px;
+  }
+  
+  .settings-actions {
+    align-items: flex-start;
     flex-direction: column;
   }
 
@@ -168,7 +455,14 @@ a {
     padding: 28px 20px;
   }
 
-  .dashboard-grid {
+  .dashboard-grid,
+  .fitness-grid {
     grid-template-columns: 1fr;
+  }
+
+  .fitness-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
   }
 }

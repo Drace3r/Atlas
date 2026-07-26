@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../components/layout/Header";
 import DashboardCard from "../components/DashboardCard";
 
 function Dashboard() {
