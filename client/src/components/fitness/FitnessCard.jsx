@@ -1,4 +1,5 @@
 import ProgressBar from "../ui/ProgressBar";
+import {getWeeklyProgress} from "../../services/fitnessService";
 
 function FitnessCard({ card }) {
   const Icon = card.icon;
@@ -8,9 +9,10 @@ function FitnessCard({ card }) {
     typeof card.goal === "number" &&
     card.goal > 0;
 
-  const progress = hasGoal
-    ? Math.round((card.completed / card.goal) * 100)
-    : 0;
+    const weeklyProgress = getWeeklyProgress(
+        card.completed,
+        card.goal,
+      );
 
   return (
     <article className="fitness-card">
@@ -25,13 +27,13 @@ function FitnessCard({ card }) {
       {hasGoal ? (
         <>
           <span>
-            {card.completed} av {card.goal} pass
-          </span>
+        {weeklyProgress.completed} av {weeklyProgress.goal} pass
+            </span>
 
-          <ProgressBar
-            value={progress}
-            label="Veckans framsteg"
-          />
+        <ProgressBar
+        value={weeklyProgress.percentage}
+        label="Veckans framsteg"
+        />
         </>
       ) : (
         card.description && <span>{card.description}</span>
