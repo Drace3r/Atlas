@@ -1,14 +1,13 @@
-import dashboardCards from "../data/dashboardData";
 import { getFitnessDashboardCard } from "./fitnessService";
+import { getCareerDashboardCard } from "./careerService";
+import { getWeddingDashboardCard } from "./weddingService";
+import { getAIDashboardCard } from "./aiService";
 
 export function getDashboardCards(settings) {
-  return dashboardCards.map((card) => {
-    switch (card.id) {
-      case "fitness":
-        return getFitnessDashboardCard(settings);
-
-      default:
-        return card;
-    }
-  });
+  return [
+    getFitnessDashboardCard(settings),
+    getCareerDashboardCard(),
+    getWeddingDashboardCard(),
+    getAIDashboardCard(),
+  ];
 }
