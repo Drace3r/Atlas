@@ -6,6 +6,9 @@ function Settings() {
 
   const [name, setName] = useState(settings.user.name);
   const [initials, setInitials] = useState(settings.user.initials);
+  const [weeklyGoal, setWeeklyGoal] = useState(
+    settings.fitness.weeklyGoal,
+  );
   const [saved, setSaved] = useState(false);
 
   function handleSubmit(event) {
@@ -24,6 +27,10 @@ function Settings() {
         ...currentSettings.user,
         name: trimmedName,
         initials: trimmedInitials,
+      },
+      fitness: {
+        ...currentSettings.fitness,
+        weeklyGoal: Number(weeklyGoal),
       },
     }));
 
@@ -78,6 +85,22 @@ function Settings() {
               required
             />
           </label>
+          <label className="form-field">
+  <span>Veckomål för träning</span>
+
+  <input
+    type="number"
+    min="1"
+    max="14"
+    value={weeklyGoal}
+    onChange={(event) => {
+      setWeeklyGoal(event.target.value);
+      setSaved(false);
+    }}
+    required
+  />
+</label>
+         
 
           <div className="settings-actions">
             <button className="primary-button" type="submit">

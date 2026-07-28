@@ -1,14 +1,19 @@
 import Header from "../components/layout/Header";
 import DashboardCard from "../components/DashboardCard";
-import dashboardCards from "../data/dashboardData";
+import {useApp} from "../context/AppContext"
+import { getDashboardCards } from "../services/dashboardService"
 
 function Dashboard() {
-    
+    const {settings} = useApp();
+
+    const cards = getDashboardCards(settings);
+
+
     return (
     <main className="main-content">
       <Header />
       <section className="dashboard-grid">  
-      {dashboardCards.map((card)=> (
+      {cards.map((card)=> (
         <DashboardCard
           key={card.title}
           icon={card.icon}
