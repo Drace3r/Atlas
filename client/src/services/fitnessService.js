@@ -21,9 +21,9 @@ export function getWeeklyProgress(completed, goal) {
     };
   }
   
-  export function getFitnessDashboardCard(settings) {
+  export function getFitnessDashboardCard(settings, workoutLogs) {
     const weeklyProgress = getWeeklyProgress(
-      3,
+      workoutLogs.length,
       settings.fitness.weeklyGoal,
     );
   

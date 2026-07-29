@@ -4,9 +4,12 @@ import {useApp} from "../context/AppContext"
 import { getDashboardCards } from "../services/dashboardService"
 
 function Dashboard() {
-    const {settings} = useApp();
+  const { settings, workoutLogs } = useApp();
 
-    const cards = getDashboardCards(settings);
+  const cards = getDashboardCards(
+    settings,
+    workoutLogs,
+  );
 
 
     return (

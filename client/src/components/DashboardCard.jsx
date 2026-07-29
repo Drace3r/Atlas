@@ -1,14 +1,18 @@
+import Card from "./card";
+
 function DashboardCard({ icon, title, heading, description, children}){
     return (
-        <article className="card">
+        <Card as="article">
             <span className="card-icon">{icon}</span>
+            
             <p>{title}</p>
+            
             <h3>{heading}</h3>
 
         {description && <span>{description}</span>}
 
         {children}
-        </article>
+        </Card>
     );
 }
 export default DashboardCard;

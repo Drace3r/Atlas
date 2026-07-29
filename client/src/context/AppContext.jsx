@@ -1,4 +1,3 @@
-import React from "react";
 import { 
     createContext,
     useContext,
@@ -40,12 +39,67 @@ const defaultSettings = {
         JSON.stringify(settings)
       );
     }, [settings]);
-  
+
+    const [workoutLogs, setWorkoutLogs] = useState (() => {
+        const savedLogs = localStorage.getItem("forsemalm-workout-logs");
+
+        if (savedLogs) {
+            return JSON.parse(savedLogs);
+        }
+
+        return[];
+    }); 
+
+    useEffect(() => {
+        localStorage.setItem(
+            "forsemalm-workout-logs",
+            JSON.stringify(workoutLogs),
+        );
+    }, [workoutLogs]);
+    function addWorkoutLog(workout) {
+        const newWorkoutLog = {
+          id: crypto.randomUUID(),
+          date: new Date().toISOString(),
+          ...workout,
+        };
+        
+        
+        setWorkoutLogs((currentLogs) => [
+          newWorkoutLog,
+          ...currentLogs,
+        ]);
+      }
+
+      function updateWorkoutLog(workoutId, updates) {
+        setWorkoutLogs((currentLogs) =>
+        currentLogs.map((workout) =>
+        workout.id === workoutId
+        ? {
+          ...workout,
+          ...updates,
+
+        }
+        : workout,
+        ),
+        );
+    }
+
+      function deleteWorkoutLog(workoutId) {
+        setWorkoutLogs((currentLogs) =>
+          currentLogs.filter((workout) => workout.id !== workoutId),
+        );
+      }
+
+      
     return (
       <AppContext.Provider
         value={{
           settings,
           setSettings,
+          workoutLogs,
+          addWorkoutLog,
+          updateWorkoutLog,
+          deleteWorkoutLog,
         }}
       >
         {children}

@@ -3,9 +3,9 @@ import { getCareerDashboardCard } from "./careerService";
 import { getWeddingDashboardCard } from "./weddingService";
 import { getAIDashboardCard } from "./aiService";
 
-export function getDashboardCards(settings) {
+export function getDashboardCards(settings, workoutLogs) {
   return [
-    getFitnessDashboardCard(settings),
+    getFitnessDashboardCard(settings, workoutLogs),
     getCareerDashboardCard(),
     getWeddingDashboardCard(),
     getAIDashboardCard(),
