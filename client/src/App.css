@@ -710,6 +710,105 @@ a {
 }
 
 /* =========================
+   BADGES
+========================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge--default {
+  background: #edf3e8;
+  color: #586a53;
+}
+
+.badge--success {
+  background: #dff4e2;
+  color: #26753d;
+}
+
+.badge--warning {
+  background: #fff4d6;
+  color: #9b6a00;
+}
+
+.badge--danger {
+  background: #fde3e1;
+  color: #a63d34;
+}
+
+
+.guest-table-card {
+  margin-top: 1.5rem;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.guest-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.guest-table th,
+.guest-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.guest-table th {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.guest-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-badge--success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803d;
+}
+
+.status-badge--danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #b91c1c;
+}
+
+.status-badge--warning {
+  background: rgba(245, 158, 11, 0.18);
+  color: #b45309;
+}
+
+.status-badge--neutral {
+  background: rgba(107, 114, 128, 0.15);
+  color: #4b5563;
+}
+/* =========================
    RESPONSIVE
 ========================= */
 

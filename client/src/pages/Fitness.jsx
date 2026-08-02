@@ -1,5 +1,5 @@
 import FitnessCard from "../components/fitness/FitnessCard";
-import fitnessData from "../data/fitnessData";
+import fitnessData from "../modules/fitness/data/fitnessData";
 import WorkoutCard from "../components/fitness/WorkoutCard";
 import {useState} from "react";
 import WorkoutLogger from "../components/fitness/WorkoutLogger";

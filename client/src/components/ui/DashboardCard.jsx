@@ -1,4 +1,4 @@
-import Card from "./card";
+import Card from "../../shared/components/Card/Card";
 
 function DashboardCard({ icon, title, heading, description, children}){
     return (

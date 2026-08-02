@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Check, Circle } from "lucide-react";
-import ProgressBar from "../ui/ProgressBar";
+import ProgressBar from "../../shared/components/Progressbar/ProgressBar";
 import workouts from "../../data/workouts";
 
 function WorkoutCard({ card }) {

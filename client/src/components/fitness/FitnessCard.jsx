@@ -1,5 +1,5 @@
-import ProgressBar from "../ui/ProgressBar";
-import {getWeeklyProgress} from "../../services/fitnessService";
+import ProgressBar from "../../shared/components/Progressbar/ProgressBar";
+import {getWeeklyProgress} from "../../modules/fitness/services/fitnessService";
 
 function FitnessCard({ card }) {
   const Icon = card.icon;

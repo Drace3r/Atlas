@@ -3,17 +3,20 @@ function Button({
     variant = "primary",
     type = "button",
     className = "",
-    ...props 
-}) {
-    const buttonClassName = `button button--${variant} ${className}`.trim();
-
+    ...props
+  }) {
+    const buttonClassName =
+      `button button--${variant} ${className}`.trim();
+  
     return (
-        <button
+      <button
         type={type}
         className={buttonClassName}
         {...props}
-        >
-        {children}    
-        </button>
+      >
+        {children}
+      </button>
     );
-}
+  }
+  
+  export default Button;

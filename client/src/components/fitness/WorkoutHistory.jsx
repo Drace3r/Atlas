@@ -9,7 +9,7 @@ import {
 
 import { useApp } from "../../context/AppContext";
 
-import Button from "../ui/Button"
+import Button from "../ui/Button";
 
 function WorkoutHistory() {
   const {

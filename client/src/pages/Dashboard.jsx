@@ -1,5 +1,5 @@
 import Header from "../components/layout/Header";
-import DashboardCard from "../components/DashboardCard";
+import DashboardCard from "../components/ui/DashboardCard";
 import {useApp} from "../context/AppContext"
 import { getDashboardCards } from "../services/dashboardService"
 
