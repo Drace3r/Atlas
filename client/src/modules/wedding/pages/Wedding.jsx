@@ -1,7 +1,10 @@
+import "../styles/wedding.css"
+
 import WeddingStats from "../components/WeddingStats";
 import GuestTable from "../components/GuestTable";
 import WeddingOverviewCards from "../components/WeddingOverviewCards";
 import SeatingPlanner from "../components/SeatingPlanner/SeatingPlanner";
+
 
 function Wedding() {
   return (
