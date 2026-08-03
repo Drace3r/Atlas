@@ -1,8 +1,6 @@
 import { useState } from "react";
 import weddingService from "../../services/weddingService";
 
-
-
 const initialTables = [
   {
     id: "table-1",
@@ -18,12 +16,71 @@ const initialTables = [
   },
 ];
 
+const nextTableNumber = (tables) => tables.length + 1;
+
 function SeatingPlanner() {
   const attendingGuests = weddingService.getAttendingGuests();
-
   const [tables, setTables] = useState(initialTables);
 
-  
+  function addTable() {
+    setTables((currentTables) => [
+      ...currentTables,
+      {
+        id: crypto.randomUUID(),
+        name: `Bord ${nextTableNumber(currentTables)}`,
+        capacity: 8,
+        guestIds: [],
+      },
+    ]);
+  }
+
+  function updateTableName(tableId, newName) {
+    setTables((currentTables) =>
+      currentTables.map((table) =>
+        table.id === tableId
+          ? { ...table, name: newName }
+          : table
+      )
+    );
+  }
+
+  function renameTable(tableId, newName) {
+    const trimmedName = newName.trim();
+
+    if (!trimmedName) {
+      return;
+    }
+
+    setTables((currentTables) =>
+      currentTables.map((table) =>
+        table.id === tableId
+          ? { ...table, name: trimmedName }
+          : table
+      )
+    );
+  }
+
+  function updateTableCapacity(tableId, newCapacity) {
+    setTables((currentTables) =>
+      currentTables.map((table) => {
+        if (table.id !== tableId) {
+          return table;
+        }
+
+        const parsedCapacity = Number(newCapacity);
+
+const safeCapacity = Math.max(
+  Number.isNaN(parsedCapacity) ? 0 : parsedCapacity,
+  table.guestIds.length
+);
+
+        return {
+          ...table,
+          capacity: safeCapacity,
+        };
+      })
+    );
+  }
 
   function assignGuestToTable(guestId, tableId) {
     setTables((currentTables) =>
@@ -83,6 +140,16 @@ function SeatingPlanner() {
         </span>
       </div>
 
+      <div className="section-actions">
+        <button
+          type="button"
+          className="button button--primary"
+          onClick={addTable}
+        >
+          + Lägg till bord
+        </button>
+      </div>
+
       <div className="seating-layout">
         <aside className="unassigned-guests">
           <h3>Ej placerade</h3>
@@ -96,9 +163,9 @@ function SeatingPlanner() {
 
                 <select
                   defaultValue=""
-                  onChange={(event) => {
-                    assignGuestToTable(guest.id, event.target.value);
-                  }}
+                  onChange={(event) =>
+                    assignGuestToTable(guest.id, event.target.value)
+                  }
                   aria-label={`Välj bord för ${guest.name}`}
                 >
                   <option value="" disabled>
@@ -124,11 +191,41 @@ function SeatingPlanner() {
           {tables.map((table) => (
             <article key={table.id} className="table-card">
               <div className="table-card__header">
-                <h3>{table.name}</h3>
+                <input
+                  className="table-name-input"
+                  type="text"
+                  value={table.name}
+                  onChange={(event) =>
+                    updateTableName(table.id, event.target.value)
+                  }
+                  onBlur={(event) =>
+                    renameTable(table.id, event.target.value)
+                  }
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.currentTarget.blur();
+                    }
+                  }}
+                  aria-label={`Namn på ${table.name}`}
+                />
 
-                <span>
-                  {table.guestIds.length}/{table.capacity}
-                </span>
+                <div className="table-capacity">
+                  <span>{table.guestIds.length}/</span>
+
+                  <input
+                    type="number"
+                    min={table.guestIds.length}
+                    max={50}
+                    value={table.capacity}
+                    onChange={(event) =>
+                      updateTableCapacity(
+                        table.id,
+                        event.target.value
+                      )
+                    }
+                    aria-label={`Antal platser vid ${table.name}`}
+                  />
+                </div>
               </div>
 
               {table.guestIds.length === 0 ? (
@@ -143,17 +240,40 @@ function SeatingPlanner() {
                     }
 
                     return (
-                      <li key={guest.id}>
-                        <span>{guest.name}</span>
+                      <li key={guest.id} className="seated-guest">
+  <span>{guest.name}</span>
 
-                        <button
-                          type="button"
-                          onClick={() => removeGuestFromTable(guest.id)}
-                          aria-label={`Ta bort ${guest.name} från ${table.name}`}
-                        >
-                          Ta bort
-                        </button>
-                      </li>
+  <select
+    value={table.id}
+    onChange={(event) =>
+      assignGuestToTable(guest.id, event.target.value)
+    }
+    aria-label={`Flytta ${guest.name} till ett annat bord`}
+  >
+    {tables.map((targetTable) => (
+      <option
+        key={targetTable.id}
+        value={targetTable.id}
+        disabled={
+          targetTable.id !== table.id &&
+          targetTable.guestIds.length >= targetTable.capacity
+        }
+      >
+        {targetTable.name} – {targetTable.guestIds.length}/
+        {targetTable.capacity}
+      </option>
+    ))}
+  </select>
+
+  <button
+    type="button"
+    className="button button--danger"
+    onClick={() => removeGuestFromTable(guest.id)}
+    aria-label={`Ta bort ${guest.name} från ${table.name}`}
+  >
+    Ta bort
+  </button>
+</li>
                     );
                   })}
                 </ul>
