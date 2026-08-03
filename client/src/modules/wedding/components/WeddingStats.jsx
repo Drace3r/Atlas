@@ -1,5 +1,5 @@
-import DashboardCard from "../ui/DashboardCard";
-import weddingService from "../../modules/wedding/services/weddingService";
+import DashboardCard from "../../../components/ui/DashboardCard";
+import weddingService from "../services/weddingService";
 
 function WeddingStats() {
   const weddingStats = weddingService.getStats();

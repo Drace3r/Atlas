@@ -7,23 +7,23 @@ const weddingStats = {
   
   export const guests = [
     {
-      id: 1,
+      id: "guest-1",
       name: "Anna Andersson",
       status: "attending",
       allergies: "Gluten",
       respondedAt: "2026-07-27",
     },
     {
-      id: 2,
+      id: "guest-2",
       name: "Johan Svensson",
       status: "declined",
       allergies: "",
       respondedAt: "2026-07-26",
     },
     {
-      id: 3,
+      id: "guest-3",
       name: "Lisa Karlsson",
-      status: "waiting",
+      status: "pending",
       allergies: "",
       respondedAt: "",
     },

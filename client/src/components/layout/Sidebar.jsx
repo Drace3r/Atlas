@@ -45,7 +45,7 @@ function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <h1 className="logo">Forsemalm Hub</h1>
+      <h1 className="logo">Atlas</h1>
 
       <nav className="navigation">
         {menuItems.map((item) => {

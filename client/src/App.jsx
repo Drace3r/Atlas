@@ -3,10 +3,10 @@ import {Route, Routes} from "react-router-dom";
 
 
 import Sidebar from "./components/layout/Sidebar";
-import Dashboard from "./pages/Dashboard";
+import { Dashboard } from "./modules/dahboard";
 import Fitness from "./pages/Fitness";
 import Career from "./pages/Career";
-import Wedding from "./pages/Wedding";
+import { Wedding } from "./modules/wedding";
 import AIAssistant from "./pages/AIAssistant";
 import Settings from "./pages/Settings";
 

@@ -50,7 +50,7 @@ function Settings() {
         <div>
           <p className="eyebrow">Settings</p>
           <h1>Inställningar</h1>
-          <p>Anpassa Forsemalm Hub efter dig och dina mål.</p>
+          <p>Anpassa Atlas efter dig och dina mål.</p>
         </div>
       </header>
 

@@ -5,11 +5,11 @@ function Header() {
 
   return (
     <header className="page-header">
-      <div>
-        <p className="eyebrow">Dashboard</p>
-        <h2>Hej {settings.user.name}! 👋</h2>
-        <p>Här är en överblick över din vardag.</p>
-      </div>
+     <div>
+    <p className="eyebrow">ATLAS</p>
+    <h2>Välkommen tillbaka, {settings.user.name}! 👋</h2>
+    <p>Din personliga kontrollcentral.</p>
+</div>
 
       <button className="profile-button" type="button">
         {settings.user.initials}

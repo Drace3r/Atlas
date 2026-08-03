@@ -1,5 +1,5 @@
-import Card from "../../shared/components/Card/Card";
-import weddingService from "../../modules/wedding/services/weddingService";
+import Card from "../../../shared/components/Card/Card";
+import weddingService from "../services/weddingService";
 import GuestRow from "./GuestRow";
 
 function GuestTable() {
