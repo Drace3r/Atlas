@@ -1,0 +1,97 @@
+.venue {
+    position: relative;
+    width: 100%;
+    min-width: 900px;
+    min-height: 900px;
+    overflow: hidden;
+  }
+  
+  .venue__tables {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+  
+  .venue-object {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    border: 2px dashed rgba(125, 145, 117, 0.55);
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.78);
+    color: #41483f;
+    text-align: center;
+    pointer-events: none;
+  }
+  
+  .venue-object__icon {
+    font-size: 1.4rem;
+  }
+  
+  .venue-object--entrance {
+    top: 20px;
+    left: 40px;
+  }
+  
+  .venue-object--dance-floor {
+    top: 330px;
+    left: 50%;
+    width: 230px;
+    height: 170px;
+    transform: translateX(-50%);
+    border-color: rgba(128, 107, 150, 0.55);
+    background-color: rgba(237, 231, 244, 0.8);
+  }
+  
+  .venue-object--bar {
+    bottom: 40px;
+    left: 40px;
+    width: 180px;
+  }
+  
+  .venue-object--dj {
+    right: 40px;
+    bottom: 40px;
+    width: 150px;
+  }
+  /* =========================
+   VENUE WALLS
+========================= */
+
+.venue-wall {
+    position: absolute;
+    background: #8f9b80;
+    border-radius: 999px;
+    z-index: 0;
+  }
+  
+  .venue-wall--top {
+    left: 30px;
+    right: 30px;
+    top: 30px;
+    height: 8px;
+  }
+  
+  .venue-wall--bottom {
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    height: 8px;
+  }
+  
+  .venue-wall--left {
+    top: 30px;
+    bottom: 30px;
+    left: 30px;
+    width: 8px;
+  }
+  
+  .venue-wall--right {
+    top: 30px;
+    bottom: 30px;
+    right: 30px;
+    width: 8px;
+  }

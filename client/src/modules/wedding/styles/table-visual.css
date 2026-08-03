@@ -1,0 +1,123 @@
+.table-card--round {
+    border-top: 4px solid #7d9175;
+  }
+  
+  .table-card--rectangular {
+    border-top: 4px solid #806b96;
+  }
+  .table-visual {
+    display: grid;
+    place-items: center;
+    min-height: 180px;
+    margin: 1.25rem 0;
+    padding: 1rem;
+    border-radius: 16px;
+    background-color: #f8faf7;
+  }
+  
+  .table-surface {
+    display: grid;
+    place-items: center;
+    border: 2px solid #7d9175;
+    background-color: #edf3e8;
+    color: #41483f;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(32, 40, 32, 0.1);
+    transition:
+      width 0.25s ease,
+      height 0.25s ease,
+      border-radius 0.25s ease;
+  }
+  
+  .table-visual--round .table-surface {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+  }
+  
+  .table-visual--rectangular .table-surface {
+    width: min(100%, 360px);
+    height: 110px;
+    border-radius: 18px;
+  }
+
+  .table-seat {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 2px solid #7d9175;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 800;
+    box-shadow: 0 3px 8px rgba(32, 40, 32, 0.12);
+  }
+  
+  .table-seat--empty {
+    background-color: white;
+  }
+  
+  .table-seat--occupied {
+    border-color: #697c63;
+    background-color: #7d9175;
+    color: white;
+  }
+  
+  .table-seat__initials {
+    color: inherit;
+  }
+  
+  /* RUNT BORD */
+  
+  .round-table-layout {
+    position: relative;
+    width: 230px;
+    height: 230px;
+    margin-inline: auto;
+  }
+  
+  .round-table-layout .table-surface {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110px;
+    height: 110px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  
+  .round-seat-position {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(360deg / var(--seat-count) * var(--seat-index)))
+      translateY(-80px);
+  }
+  
+  .round-seat-position .table-seat {
+    transform: rotate(
+      calc(-360deg / var(--seat-count) * var(--seat-index))
+    );
+  }
+  
+  /* AVLÅNGT BORD */
+  
+  .rectangular-table-layout {
+    display: grid;
+    gap: 12px;
+    width: min(100%, 420px);
+  }
+  
+  .rectangular-table-layout .table-surface {
+    width: 100%;
+    height: 110px;
+    border-radius: 18px;
+  }
+  
+  .rectangular-seat-row {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+  }

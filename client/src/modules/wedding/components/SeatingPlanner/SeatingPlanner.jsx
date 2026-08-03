@@ -4,6 +4,7 @@ import UnassignedGuests from "./UnassignedGuests";
 import TableCard from "./TableCard";
 import FloorPlan from "./FloorPlan";
 import TableEditorPanel from "./TableEditorPanel";
+import Venue from "../Venue/Venue";
 
 const initialTables = [
   {
@@ -271,27 +272,29 @@ function SeatingPlanner() {
           onAssignGuest={assignGuestToTable}
         />
 
-        <FloorPlan tables={tables}>
-          {tables.map((table) => (
-            <TableCard
-              key={table.id}
-              table={table}
-              tables={tables}
-              getGuestById={getGuestById}
-              onUpdateName={updateTableName}
-              onRename={renameTable}
-              onUpdateCapacity={updateTableCapacity}
-              onUpdateShape={updateTableShape}
-              onAssignGuest={assignGuestToTable}
-              onRemoveGuest={removeGuestFromTable}
-              dragging={draggingTableId === table.id}
-              onDragStart={startDragging}
-              onDrag={dragTable}
-              onDragEnd={stopDragging}
-              selected={selectedTableId === table.id}
-              onSelect={setSelectedTableId}
-            />
-          ))}
+        <FloorPlan>
+          <Venue>
+            {tables.map((table) => (
+              <TableCard
+                key={table.id}
+                table={table}
+                tables={tables}
+                getGuestById={getGuestById}
+                onUpdateName={updateTableName}
+                onRename={renameTable}
+                onUpdateCapacity={updateTableCapacity}
+                onUpdateShape={updateTableShape}
+                onAssignGuest={assignGuestToTable}
+                onRemoveGuest={removeGuestFromTable}
+                dragging={draggingTableId === table.id}
+                onDragStart={startDragging}
+                onDrag={dragTable}
+                onDragEnd={stopDragging}
+                selected={selectedTableId === table.id}
+                onSelect={setSelectedTableId}
+              />
+            ))}
+          </Venue>
         </FloorPlan>
         <TableEditorPanel
           table={selectedTable}

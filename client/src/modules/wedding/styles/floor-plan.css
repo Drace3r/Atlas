@@ -1,0 +1,133 @@
+/* =========================
+   FLOOR PLAN
+========================= */
+
+.floor-plan {
+    width: 100%;
+    overflow: auto;
+    border: 1px solid #dde2da;
+    border-radius: 24px;
+    background-color: white;
+  }
+  
+  .floor-plan__canvas {
+    position: relative;
+    min-width: 900px;
+    min-height: 900px;
+    background-color: #f8faf7;
+    background-image:
+      linear-gradient(#e2e7df 1px, transparent 1px),
+      linear-gradient(90deg, #e2e7df 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* =========================
+     FLOOR TABLE
+  ========================= */
+  
+  .floor-plan .floor-table {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    width: 280px;
+    padding: 20px;
+  
+    border: 1px solid rgba(125, 145, 117, 0.3);
+    border-radius: 24px;
+  
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 14px 32px rgba(32, 40, 32, 0.12);
+  
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    backdrop-filter: blur(8px);
+  
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .floor-plan .floor-table:hover {
+    border-color: #7d9175;
+    box-shadow: 0 18px 38px rgba(32, 40, 32, 0.17);
+  }
+  
+  .floor-table--dragging {
+    z-index: 100;
+    cursor: grabbing;
+    transform: scale(1.03);
+    box-shadow: 0 24px 48px rgba(32, 40, 32, 0.24);
+  }
+  
+  .floor-table--selected {
+    border-color: #7d9175;
+    box-shadow:
+      0 0 0 3px rgba(125, 145, 117, 0.2),
+      0 18px 38px rgba(32, 40, 32, 0.17);
+  }
+  
+  /* =========================
+     TABLE VISUAL INSIDE CARD
+  ========================= */
+  
+  .floor-table .table-visual {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .floor-table--round .table-visual {
+    display: grid;
+    place-items: center;
+    padding: 0;
+  }
+  
+  
+  /* =========================
+     TABLE META
+  ========================= */
+  
+  .floor-table__meta {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+  
+    width: 100%;
+    margin-top: 1.25rem;
+    padding-top: 0.25rem;
+  
+    text-align: center;
+  }
+  
+  .floor-table__meta strong {
+    font-size: 1rem;
+  }
+  
+  .floor-table__meta span {
+    color: #747a72;
+    font-size: 0.82rem;
+  }
+  
+  /* =========================
+     SEATING LAYOUT
+  ========================= */
+  
+  .seating-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) 300px;
+    align-items: start;
+    gap: 1.5rem;
+  }
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  
+  @media (max-width: 1100px) {
+    .seating-layout {
+      grid-template-columns: 1fr;
+    }
+  }
