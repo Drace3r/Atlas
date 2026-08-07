@@ -1,9 +1,30 @@
+import { useEffect, useState } from "react";
+
 import Card from "../../../shared/components/Card/Card";
 import weddingService from "../services/weddingService";
 import GuestRow from "./GuestRow";
 
 function GuestTable() {
-  const guests = weddingService.getGuests();
+  const [guests, setGuests] = useState([]);
+
+  useEffect(() => {
+    async function loadGuests() {
+      try {
+        const weddingGuests = await weddingService.getGuests();
+
+        console.log("Gäster från Wedding:", weddingGuests);
+
+        setGuests(weddingGuests);
+      } catch (error) {
+        console.error(
+          "Kunde inte hämta Wedding-gäster:",
+          error
+        );
+      }
+    }
+
+    loadGuests();
+  }, []);
 
   return (
     <Card as="section" className="guest-table-card">
@@ -26,13 +47,13 @@ function GuestTable() {
           </thead>
 
           <tbody>
-  {guests.map((guest) => (
-    <GuestRow
-      key={guest.id}
-      guest={guest}
-    />
-  ))}
-</tbody>
+            {guests.map((guest) => (
+              <GuestRow
+                key={guest.id}
+                guest={guest}
+              />
+            ))}
+          </tbody>
         </table>
       </div>
     </Card>

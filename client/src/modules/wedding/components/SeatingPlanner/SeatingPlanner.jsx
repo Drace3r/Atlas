@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
 import weddingService from "../../services/weddingService";
 import UnassignedGuests from "./UnassignedGuests";
 import TableCard from "./TableCard";
 import FloorPlan from "./FloorPlan";
 import TableEditorPanel from "./TableEditorPanel";
 import Venue from "../Venue/Venue";
+import { useEffect, useRef, useState } from "react";
 
 const initialTables = [
   {
@@ -26,7 +26,22 @@ const initialTables = [
 ];
 
 function SeatingPlanner() {
-  const attendingGuests = weddingService.getAttendingGuests();
+  const [attendingGuests, setAttendingGuests] = useState([]);
+  useEffect(() =>{
+    async function loadGuests(){
+      try {
+        const guests = 
+        await weddingService.getAttendingGuests();
+        setAttendingGuests(guests);
+      } catch (error) {
+        console.error(
+          "Kunde inte hämta gäster till bordsplaceringen",
+          error
+        );
+      }
+    }
+    loadGuests();
+  }, []);
   const [tables, setTables] = useState(initialTables);
   const [draggingTableId, setDraggingTableId] = useState(null);
   const nextTableNumber = (tables) => tables.length + 1;
