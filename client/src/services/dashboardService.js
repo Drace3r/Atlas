@@ -16,9 +16,25 @@ export async function getDashboardCards(
   settings,
   workoutLogs
 ) {
-  const weddingCard =
-    await weddingService
-      .getWeddingDashboardCard();
+  let weddingCard = {
+    id: "wedding",
+    title: "Wedding",
+    heading: "Kunde inte ansluta",
+    description: "Wedding-backenden är offline",
+    icon: "💒",
+    path: "/wedding",
+  };
+
+  try {
+    weddingCard =
+      await weddingService
+        .getWeddingDashboardCard();
+  } catch (error) {
+    console.error(
+      "Wedding-backenden är inte tillgänglig:",
+      error
+    );
+  }
 
   return [
     getFitnessDashboardCard(

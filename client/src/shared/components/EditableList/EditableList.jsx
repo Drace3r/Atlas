@@ -1,24 +1,27 @@
 import { useState } from "react";
+import { Plus } from "lucide-react";
 import EditableListItem from "./EditableListItem";
 
 function EditableList({ title, initialItems = [] }) {
   const [items, setItems] = useState(initialItems);
+
   const [newItemTitle, setNewItemTitle] = useState("");
 
   function toggleItem(id) {
     setItems((currentItems) =>
       currentItems.map((item) =>
         item.id === id
-          ? { ...item, completed: !item.completed }
+          ? {
+              ...item,
+              completed: !item.completed,
+            }
           : item
       )
     );
   }
 
   function deleteItem(id) {
-    setItems((currentItems) =>
-      currentItems.filter((item) => item.id !== id)
-    );
+    setItems((currentItems) => currentItems.filter((item) => item.id !== id));
   }
 
   function saveItem(id, title) {
@@ -30,7 +33,12 @@ function EditableList({ title, initialItems = [] }) {
 
     setItems((currentItems) =>
       currentItems.map((item) =>
-        item.id === id ? { ...item, title: trimmedTitle } : item
+        item.id === id
+          ? {
+              ...item,
+              title: trimmedTitle,
+            }
+          : item
       )
     );
   }
@@ -52,22 +60,43 @@ function EditableList({ title, initialItems = [] }) {
     };
 
     setItems((currentItems) => [...currentItems, newItem]);
+
     setNewItemTitle("");
   }
 
   const completedCount = items.filter((item) => item.completed).length;
 
+  const progressPercentage =
+    items.length > 0 ? (completedCount / items.length) * 100 : 0;
+
   return (
     <section className="editable-list">
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">IDAG</p>
-          <h2>{title}</h2>
+      {title && (
+        <div className="editable-list__header">
+          <div>
+            <p className="eyebrow">Idag</p>
+            <h2>{title}</h2>
+          </div>
+        </div>
+      )}
+
+      <div className="editable-list__progress">
+        <div className="editable-list__progress-text">
+          <span>Din utveckling idag</span>
+
+          <strong>
+            {completedCount}/{items.length} klara
+          </strong>
         </div>
 
-        <span>
-          {completedCount}/{items.length} klara
-        </span>
+        <div className="editable-list__progress-track">
+          <div
+            className="editable-list__progress-fill"
+            style={{
+              width: `${progressPercentage}%`,
+            }}
+          />
+        </div>
       </div>
 
       <ul className="editable-list__items">
@@ -91,7 +120,11 @@ function EditableList({ title, initialItems = [] }) {
           aria-label="Ny uppgift"
         />
 
-        <button type="submit">Lägg till</button>
+        <button type="submit">
+          <Plus size={18} strokeWidth={2} />
+
+          <span>Lägg till</span>
+        </button>
       </form>
     </section>
   );

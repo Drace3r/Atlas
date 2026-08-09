@@ -6,6 +6,7 @@ import {
   House,
   Settings,
 } from "lucide-react";
+
 import { NavLink } from "react-router-dom";
 
 function Sidebar() {
@@ -45,9 +46,18 @@ function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <h1 className="logo">Atlas</h1>
+      <div className="atlas-brand" aria-label="Atlas – Plan. Build. Grow.">
+        <div className="atlas-brand__mark" aria-hidden="true">
+          <span>A</span>
+        </div>
 
-      <nav className="navigation">
+        <div className="atlas-brand__text">
+          <p>Atlas</p>
+          <span>Plan. Build. Grow.</span>
+        </div>
+      </div>
+
+      <nav className="navigation" aria-label="Huvudmeny">
         {menuItems.map((item) => {
           const Icon = item.icon;
 
@@ -59,6 +69,7 @@ function Sidebar() {
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               <Icon size={20} strokeWidth={1.8} />
+
               <span>{item.name}</span>
             </NavLink>
           );
