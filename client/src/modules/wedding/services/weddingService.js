@@ -1,11 +1,17 @@
-import weddingStats, { guests } from "../data/weddingData";
+const RSVP_API_URL =
+  "http://localhost:3000/api/rsvps";
+
+const SEATING_API_URL =
+  "http://localhost:3000/api/seating-plan";
 
 const weddingService = {
   async getGuests() {
-    const response = await fetch("http://localhost:3000/api/rsvps");
+    const response = await fetch(RSVP_API_URL);
 
     if (!response.ok) {
-      throw new Error("Kunde inte hämta gäster");
+      throw new Error(
+        "Kunde inte hämta gäster"
+      );
     }
 
     const weddingGuests = await response.json();
@@ -16,7 +22,9 @@ const weddingService = {
       status:
         guest.attending === "yes"
           ? "attending"
-          : "declined",
+          : guest.attending === "no"
+            ? "declined"
+            : "pending",
       allergies: guest.allergies ?? "",
       respondedAt: guest.submitted_at ?? "",
     }));
@@ -30,37 +38,87 @@ const weddingService = {
     );
   },
 
-  getPendingGuests() {
+  async getPendingGuests() {
+    const guests = await this.getGuests();
+
     return guests.filter(
       (guest) => guest.status === "pending"
     );
   },
 
-  getDeclinedGuests() {
+  async getDeclinedGuests() {
+    const guests = await this.getGuests();
+
     return guests.filter(
       (guest) => guest.status === "declined"
     );
   },
 
-  getStats() {
+  async getStats() {
+    const guests = await this.getGuests();
+
     return {
       totalGuests: guests.length,
+
       attending: guests.filter(
         (guest) => guest.status === "attending"
       ).length,
+
       pending: guests.filter(
         (guest) => guest.status === "pending"
       ).length,
+
       declined: guests.filter(
         (guest) => guest.status === "declined"
       ).length,
+
       allergies: guests.filter(
-        (guest) => guest.allergies?.trim() !== ""
+        (guest) =>
+          guest.allergies?.trim() !== ""
       ).length,
     };
   },
 
-  getWeddingDashboardCard() {
+  async getSeatingPlan() {
+    const response = await fetch(
+      SEATING_API_URL
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Kunde inte hämta bordsplaceringen"
+      );
+    }
+
+    return response.json();
+  },
+
+  async saveSeatingPlan(tables) {
+    const response = await fetch(
+      SEATING_API_URL,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tables,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Kunde inte spara bordsplaceringen"
+      );
+    }
+
+    return response.json();
+  },
+
+  async getWeddingDashboardCard() {
+    const guests = await this.getGuests();
+
     return {
       id: "wedding",
       title: "Wedding",

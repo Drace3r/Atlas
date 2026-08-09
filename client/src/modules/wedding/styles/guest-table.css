@@ -1,0 +1,22 @@
+.guest-table-card .table-wrapper {
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.guest-table-card .guest-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.guest-table-card .guest-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #ffffff;
+}
+
+.guest-table-card .guest-table th,
+.guest-table-card .guest-table td {
+  padding: 0.65rem 1rem;
+}

@@ -1,10 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import weddingService from "../../services/weddingService";
 import UnassignedGuests from "./UnassignedGuests";
 import TableCard from "./TableCard";
 import FloorPlan from "./FloorPlan";
 import TableEditorPanel from "./TableEditorPanel";
 import Venue from "../Venue/Venue";
-import { useEffect, useRef, useState } from "react";
 
 const initialTables = [
   {
@@ -13,7 +13,10 @@ const initialTables = [
     shape: "round",
     capacity: 8,
     guestIds: [],
-    coordinates: { x: 600, y: 300 },
+    coordinates: {
+      x: 600,
+      y: 300,
+    },
   },
   {
     id: "table-2",
@@ -21,57 +24,104 @@ const initialTables = [
     shape: "rectangular",
     capacity: 8,
     guestIds: [],
-    coordinates: { x: 120, y: 550 },
+    coordinates: {
+      x: 120,
+      y: 550,
+    },
   },
 ];
 
 function SeatingPlanner() {
   const [attendingGuests, setAttendingGuests] = useState([]);
-  useEffect(() =>{
-    async function loadGuests(){
+
+  const [tables, setTables] = useState(initialTables);
+
+  const [draggingTableId, setDraggingTableId] = useState(null);
+
+  const [selectedTableId, setSelectedTableId] = useState(null);
+
+  const [hasLoadedSeatingPlan, setHasLoadedSeatingPlan] = useState(false);
+
+  const activeDragRef = useRef(null);
+
+  const dragOffsetRef = useRef({
+    x: 0,
+    y: 0,
+  });
+
+  /* =======================================
+     LOAD GUESTS
+  ======================================= */
+
+  useEffect(() => {
+    async function loadGuests() {
       try {
-        const guests = 
-        await weddingService.getAttendingGuests();
+        const guests = await weddingService.getAttendingGuests();
+
         setAttendingGuests(guests);
       } catch (error) {
-        console.error(
-          "Kunde inte hämta gäster till bordsplaceringen",
-          error
-        );
+        console.error("Kunde inte hämta gäster till bordsplaceringen:", error);
       }
     }
+
     loadGuests();
   }, []);
-  const [tables, setTables] = useState(initialTables);
-  const [draggingTableId, setDraggingTableId] = useState(null);
-  const nextTableNumber = (tables) => tables.length + 1;
-  const activeDragRef = useRef(null);
-  const dragOffsetRef = useRef({ x: 0, y: 0 });
-  const [selectedTableId, setSelectedTableId] = useState(null);
-  function startDragging(tableId, event) {
-    const table = tables.find((currentTable) => currentTable.id === tableId);
 
-    if (!table) {
+  /* =======================================
+     LOAD SAVED SEATING PLAN
+  ======================================= */
+
+  useEffect(() => {
+    async function loadSeatingPlan() {
+      try {
+        const seatingPlan = await weddingService.getSeatingPlan();
+
+        if (
+          Array.isArray(seatingPlan.tables) &&
+          seatingPlan.tables.length > 0
+        ) {
+          setTables(seatingPlan.tables);
+        }
+      } catch (error) {
+        console.error("Kunde inte hämta bordsplaceringen:", error);
+      } finally {
+        setHasLoadedSeatingPlan(true);
+      }
+    }
+
+    loadSeatingPlan();
+  }, []);
+
+  /* =======================================
+     AUTO-SAVE SEATING PLAN
+  ======================================= */
+
+  useEffect(() => {
+    if (!hasLoadedSeatingPlan) {
       return;
     }
 
-    const floorPlan = event.currentTarget.closest(".floor-plan__canvas");
+    const saveTimer = window.setTimeout(async () => {
+      try {
+        await weddingService.saveSeatingPlan(tables);
+      } catch (error) {
+        console.error("Kunde inte spara bordsplaceringen:", error);
+      }
+    }, 500);
 
-    if (!floorPlan) {
-      return;
-    }
+    return () => {
+      window.clearTimeout(saveTimer);
+    };
+  }, [tables, hasLoadedSeatingPlan]);
 
-    const floorPlanRect = floorPlan.getBoundingClientRect();
-
-    setDraggingTableId(tableId);
-
-    setDragOffset({
-      x: event.clientX - floorPlanRect.left - table.coordinates.x,
-      y: event.clientY - floorPlanRect.top - table.coordinates.y,
-    });
-
-    event.currentTarget.setPointerCapture(event.pointerId);
+  function nextTableNumber(currentTables) {
+    return currentTables.length + 1;
   }
+
+  /* =======================================
+     DRAG TABLE
+  ======================================= */
+
   function startDragging(tableId, event) {
     const table = tables.find((currentTable) => currentTable.id === tableId);
 
@@ -142,15 +192,22 @@ function SeatingPlanner() {
     }
   }
 
+  /* =======================================
+     TABLE ACTIONS
+  ======================================= */
+
   function addTable() {
     setTables((currentTables) => [
       ...currentTables,
       {
         id: crypto.randomUUID(),
+
         name: `Bord ${nextTableNumber(currentTables)}`,
+
         shape: "round",
         capacity: 8,
         guestIds: [],
+
         coordinates: {
           x: 80 + currentTables.length * 30,
           y: 120 + currentTables.length * 30,
@@ -162,7 +219,12 @@ function SeatingPlanner() {
   function updateTableName(tableId, newName) {
     setTables((currentTables) =>
       currentTables.map((table) =>
-        table.id === tableId ? { ...table, name: newName } : table
+        table.id === tableId
+          ? {
+              ...table,
+              name: newName,
+            }
+          : table
       )
     );
   }
@@ -176,7 +238,12 @@ function SeatingPlanner() {
 
     setTables((currentTables) =>
       currentTables.map((table) =>
-        table.id === tableId ? { ...table, name: trimmedName } : table
+        table.id === tableId
+          ? {
+              ...table,
+              name: trimmedName,
+            }
+          : table
       )
     );
   }
@@ -206,10 +273,19 @@ function SeatingPlanner() {
   function updateTableShape(tableId, shape) {
     setTables((currentTables) =>
       currentTables.map((table) =>
-        table.id === tableId ? { ...table, shape } : table
+        table.id === tableId
+          ? {
+              ...table,
+              shape,
+            }
+          : table
       )
     );
   }
+
+  /* =======================================
+     GUEST ASSIGNMENT
+  ======================================= */
 
   function assignGuestToTable(guestId, tableId) {
     setTables((currentTables) =>
@@ -241,6 +317,7 @@ function SeatingPlanner() {
     setTables((currentTables) =>
       currentTables.map((table) => ({
         ...table,
+
         guestIds: table.guestIds.filter((id) => id !== guestId),
       }))
     );
@@ -250,34 +327,45 @@ function SeatingPlanner() {
     return attendingGuests.find((guest) => guest.id === guestId);
   }
 
+  /* =======================================
+     DERIVED DATA
+  ======================================= */
+
   const assignedGuestIds = tables.flatMap((table) => table.guestIds);
 
   const unassignedGuests = attendingGuests.filter(
     (guest) => !assignedGuestIds.includes(guest.id)
   );
+
   const selectedTable =
     tables.find((table) => table.id === selectedTableId) ?? null;
+
+  /* =======================================
+     RENDER
+  ======================================= */
+
   return (
-    <section className="seating-planner">
-      <div className="section-heading">
+    <section className="section seating-planner">
+      <div className="section-header">
         <div>
           <p className="eyebrow">BORDSPLACERING</p>
+
           <h2>Placera gäster</h2>
+
+          <span>
+            {assignedGuestIds.length}/{attendingGuests.length} placerade
+          </span>
         </div>
 
-        <span>
-          {assignedGuestIds.length}/{attendingGuests.length} placerade
-        </span>
-      </div>
-
-      <div className="section-actions">
-        <button
-          type="button"
-          className="button button--primary"
-          onClick={addTable}
-        >
-          + Lägg till bord
-        </button>
+        <div className="section-actions">
+          <button
+            type="button"
+            className="button button--primary"
+            onClick={addTable}
+          >
+            + Lägg till bord
+          </button>
+        </div>
       </div>
 
       <div className="seating-layout">
@@ -311,6 +399,7 @@ function SeatingPlanner() {
             ))}
           </Venue>
         </FloorPlan>
+
         <TableEditorPanel
           table={selectedTable}
           onUpdateName={updateTableName}
