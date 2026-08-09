@@ -122,7 +122,7 @@ const weddingService = {
     return {
       id: "wedding",
       title: "Wedding",
-      value: `${guests.length} gäster`,
+      heading: `${guests.length} gäster`,
       description: "Bröllopsplanering",
       icon: "💒",
       path: "/wedding",

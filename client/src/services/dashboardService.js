@@ -1,13 +1,32 @@
-import { getFitnessDashboardCard } from "../modules/fitness/services/fitnessService";
-import { getCareerDashboardCard } from "./careerService";
-import  WeddingService  from "../modules/wedding/services/weddingService";
-import { getAIDashboardCard } from "./aiService";
+import {
+  getFitnessDashboardCard,
+} from "../modules/fitness/services/fitnessService";
 
-export function getDashboardCards(settings, workoutLogs) {
+import {
+  getCareerDashboardCard,
+} from "./careerService";
+
+import weddingService from "../modules/wedding/services/weddingService";
+
+import {
+  getAIDashboardCard,
+} from "./aiService";
+
+export async function getDashboardCards(
+  settings,
+  workoutLogs
+) {
+  const weddingCard =
+    await weddingService
+      .getWeddingDashboardCard();
+
   return [
-    getFitnessDashboardCard(settings, workoutLogs),
+    getFitnessDashboardCard(
+      settings,
+      workoutLogs
+    ),
     getCareerDashboardCard(),
-    WeddingService.getWeddingDashboardCard(),
+    weddingCard,
     getAIDashboardCard(),
   ];
 }

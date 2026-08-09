@@ -15,11 +15,13 @@
 
 ## 📖 About
 
-Forsemalm Hub is my personal long-term development project.
+# Atlas
 
-It started as a way to learn modern React development but has evolved into a scalable application focused on clean architecture, reusable components and long-term maintainability.
+Atlas is a personal platform for planning, building and growing.
 
-Rather than building isolated pages, the goal is to build independent features that work together through shared services and global state.
+It brings together tools for fitness, career development, wedding planning and future projects in one modular dashboard.
+
+**Plan. Build. Grow.**
 
 ---
 
