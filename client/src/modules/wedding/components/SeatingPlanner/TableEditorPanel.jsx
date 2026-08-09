@@ -6,6 +6,7 @@ function TableEditorPanel({
   onRename,
   onUpdateCapacity,
   onUpdateShape,
+  onDelete,
   onClose,
 }) {
   if (!table) {
@@ -21,7 +22,7 @@ function TableEditorPanel({
       <div className="table-editor__header">
         <div>
           <p className="eyebrow">VALT BORD</p>
-          <h3>{table.name}</h3>
+          <h2>{table.name}</h2>
         </div>
 
         <button
@@ -48,6 +49,16 @@ function TableEditorPanel({
         <strong>
           {table.guestIds.length}/{table.capacity}
         </strong>
+      </div>
+
+      <div className="table-editor__danger-zone">
+        <button
+          type="button"
+          className="button table-editor__delete"
+          onClick={() => onDelete(table.id)}
+        >
+          Ta bort bord
+        </button>
       </div>
     </aside>
   );

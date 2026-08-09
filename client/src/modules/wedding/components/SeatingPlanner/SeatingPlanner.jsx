@@ -216,6 +216,35 @@ function SeatingPlanner() {
     ]);
   }
 
+  function deleteTable(tableId) {
+    const tableToDelete = tables.find((table) => table.id === tableId);
+
+    if (!tableToDelete) {
+      return;
+    }
+
+    const placedGuestCount = tableToDelete.guestIds.length;
+
+    const warning =
+      placedGuestCount > 0
+        ? `${placedGuestCount} placerade gäster flyttas tillbaka till ej placerade.`
+        : "Bordet är tomt.";
+
+    const shouldDelete = window.confirm(
+      `Vill du ta bort ${tableToDelete.name}?\n\n${warning}`
+    );
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    setTables((currentTables) =>
+      currentTables.filter((table) => table.id !== tableId)
+    );
+
+    setSelectedTableId(null);
+  }
+
   function updateTableName(tableId, newName) {
     setTables((currentTables) =>
       currentTables.map((table) =>
@@ -406,6 +435,7 @@ function SeatingPlanner() {
           onRename={renameTable}
           onUpdateCapacity={updateTableCapacity}
           onUpdateShape={updateTableShape}
+          onDelete={deleteTable}
           onClose={() => setSelectedTableId(null)}
         />
       </div>

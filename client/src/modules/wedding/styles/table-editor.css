@@ -64,3 +64,22 @@
     .table-editor {
       position: static;
     }
+
+    .table-editor__danger-zone {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ead7d7;
+}
+
+.table-editor__delete {
+  width: 100%;
+  border: 1px solid #b94a48;
+  background-color: #fff5f5;
+  color: #9f2f2d;
+}
+
+.table-editor__delete:hover {
+  border-color: #9f2f2d;
+  background-color: #9f2f2d;
+  color: #ffffff;
+}
