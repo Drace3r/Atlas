@@ -1,0 +1,129 @@
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    min-height: auto;
+    padding: 24px 20px;
+  }
+
+  .atlas-brand {
+    margin-bottom: 24px;
+  }
+
+  .navigation {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .navigation a {
+    flex: 1 1 auto;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 28px 20px;
+  }
+
+  .welcome-card {
+    min-height: auto;
+    padding: 30px 24px;
+  }
+
+  .welcome-card__visual {
+    display: none;
+  }
+
+  .page-header,
+  .fitness-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-grid,
+  .fitness-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-section {
+    padding: 24px;
+  }
+
+  .settings-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workout-history-header,
+  .workout-history-item {
+    flex-direction: column;
+  }
+
+  .workout-history-details {
+    justify-items: start;
+    max-width: 100%;
+  }
+
+  .workout-history-details span {
+    text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .main-content {
+    padding: 20px 14px;
+  }
+
+  .welcome-card {
+    padding: 26px 20px;
+    border-radius: 18px;
+  }
+
+  .welcome-card h1 {
+    font-size: 32px;
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navigation a:hover {
+    transform: none;
+  }
+
+  .todays-focus {
+    padding: 22px;
+  }
+
+  .todays-focus__heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .editable-list__form {
+    grid-template-columns: 1fr;
+  }
+
+  .editable-list__form button {
+    width: 100%;
+  }
+
+  .editable-list-item__actions {
+    opacity: 1;
+  }
+
+  .card,
+  .fitness-card,
+  .workout-logger,
+  .workout-history {
+    padding: 22px;
+  }
+}

@@ -1,0 +1,57 @@
+:root {
+  font-family:
+    Inter, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  --atlas-bg: #f3f5f9;
+  --atlas-surface: #ffffff;
+  --atlas-surface-soft: #f7f8fc;
+
+  --atlas-sidebar: #121827;
+  --atlas-sidebar-active: #27324a;
+  --atlas-sidebar-text: #cbd3e1;
+
+  --atlas-primary: #6273bd;
+  --atlas-primary-hover: #4e5f9f;
+  --atlas-primary-soft: #edf0fb;
+  --atlas-accent: #806b96;
+  --atlas-focus-ring:
+    rgba(98, 115, 189, 0.18);
+
+  --atlas-text: #232836;
+  --atlas-text-soft: #424a5c;
+  --atlas-muted: #71798a;
+  --atlas-border: #dce1eb;
+  --atlas-border-strong: #cbd2df;
+
+  --atlas-success: #3f7b55;
+  --atlas-success-soft: #e2f3e7;
+  --atlas-warning: #9b6a00;
+  --atlas-warning-soft: #fff4d6;
+  --atlas-danger: #a64747;
+  --atlas-danger-soft: #fff1f1;
+
+  --radius-small: 10px;
+  --radius-medium: 14px;
+  --radius-large: 18px;
+
+  --shadow-small:
+    0 6px 18px rgba(27, 35, 57, 0.06);
+
+  --shadow-medium:
+    0 12px 28px rgba(27, 35, 57, 0.1);
+
+  --transition-fast: 0.2s ease;
+
+  color: var(--atlas-text);
+  background-color: var(--atlas-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+

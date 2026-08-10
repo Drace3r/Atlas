@@ -43,17 +43,12 @@ function Dashboard() {
         {cards.map((card) => (
           <DashboardCard
             key={card.id}
-            icon={card.icon}
+            id={card.id}
             title={card.title}
             heading={card.heading}
             description={card.description}
-          >
-            {card.id === "ai" && (
-              <button className="card-button" type="button">
-                Öppna assistenten
-              </button>
-            )}
-          </DashboardCard>
+            path={card.path}
+          />
         ))}
       </section>
     </main>

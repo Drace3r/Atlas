@@ -1,0 +1,22 @@
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background-color: var(--atlas-bg);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background-color: var(--atlas-bg);
+  color: var(--atlas-text);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}

@@ -1,11 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { Plus } from "lucide-react";
 import EditableListItem from "./EditableListItem";
 
-function EditableList({ title, initialItems = [] }) {
-  const [items, setItems] = useState(initialItems);
+function loadSavedItems(storageKey, initialItems) {
+  if (!storageKey) {
+    return initialItems;
+  }
+
+  try {
+    const savedItems = localStorage.getItem(storageKey);
+
+    if (!savedItems) {
+      return initialItems;
+    }
+
+    const parsedItems = JSON.parse(savedItems);
+
+    return Array.isArray(parsedItems) ? parsedItems : initialItems;
+  } catch (error) {
+    console.error("Kunde inte läsa sparad lista:", error);
+
+    return initialItems;
+  }
+}
+
+function EditableList({ title, initialItems = [], storageKey }) {
+  const [items, setItems] = useState(() =>
+    loadSavedItems(storageKey, initialItems)
+  );
 
   const [newItemTitle, setNewItemTitle] = useState("");
+
+  useEffect(() => {
+    if (!storageKey) {
+      return;
+    }
+
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+    } catch (error) {
+      console.error("Kunde inte spara listan:", error);
+    }
+  }, [items, storageKey]);
 
   function toggleItem(id) {
     setItems((currentItems) =>
@@ -75,6 +112,7 @@ function EditableList({ title, initialItems = [] }) {
         <div className="editable-list__header">
           <div>
             <p className="eyebrow">Idag</p>
+
             <h2>{title}</h2>
           </div>
         </div>

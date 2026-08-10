@@ -1,0 +1,111 @@
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-header {
+  margin-bottom: 40px;
+}
+
+.settings-header h1 {
+  margin: 4px 0 8px;
+  font-size: 36px;
+}
+
+.settings-header p {
+  margin: 0;
+  color: var(--atlas-muted);
+}
+
+.settings-section {
+  max-width: 720px;
+  padding: 32px;
+
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--radius-large);
+
+  background-color: var(--atlas-surface);
+  box-shadow: var(--shadow-small);
+}
+
+.settings-section-header {
+  margin-bottom: 28px;
+}
+
+.settings-section-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+
+.settings-section-header p {
+  margin: 0;
+  color: var(--atlas-muted);
+}
+
+.settings-form {
+  display: grid;
+  gap: 22px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field > span {
+  color: var(--atlas-text-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--radius-small);
+
+  background-color:
+    var(--atlas-surface-soft);
+  color: var(--atlas-text);
+
+  font: inherit;
+  outline: none;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--atlas-primary);
+  background-color: var(--atlas-surface);
+
+  box-shadow:
+    0 0 0 3px var(--atlas-focus-ring);
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 6px;
+}
+
+.save-message {
+  margin: 0;
+
+  color: var(--atlas-success);
+
+  font-size: 14px;
+  font-weight: 600;
+}

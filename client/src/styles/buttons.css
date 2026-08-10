@@ -1,0 +1,132 @@
+/* =========================
+   BUTTONS
+========================= */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+
+  border-radius: var(--radius-small);
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.button--primary {
+  border: 1px solid var(--atlas-primary);
+  background-color: var(--atlas-primary);
+  color: #ffffff;
+}
+
+.button--primary:hover {
+  border-color:
+    var(--atlas-primary-hover);
+  background-color:
+    var(--atlas-primary-hover);
+}
+
+.button--secondary {
+  border: 1px solid var(--atlas-border);
+  background-color: var(--atlas-surface);
+  color: var(--atlas-text-soft);
+}
+
+.button--secondary:hover {
+  border-color:
+    var(--atlas-border-strong);
+  background-color:
+    var(--atlas-surface-soft);
+}
+
+.button--danger,
+.delete-button {
+  border: 1px solid #e3c5c5;
+  background-color: var(--atlas-danger-soft);
+  color: var(--atlas-danger);
+}
+
+.button--danger:hover,
+.delete-button:hover {
+  border-color: var(--atlas-danger);
+  background-color: var(--atlas-danger);
+  color: #ffffff;
+}
+
+.delete-button {
+  margin-top: 6px;
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge--default {
+  background-color:
+    var(--atlas-primary-soft);
+  color: var(--atlas-primary-hover);
+}
+
+.badge--success {
+  background-color:
+    var(--atlas-success-soft);
+  color: var(--atlas-success);
+}
+
+.badge--warning {
+  background-color:
+    var(--atlas-warning-soft);
+  color: var(--atlas-warning);
+}
+
+.badge--danger {
+  background-color:
+    var(--atlas-danger-soft);
+  color: var(--atlas-danger);
+}

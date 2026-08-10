@@ -33,7 +33,11 @@ function TodaysFocus() {
         <span className="todays-focus__label">Daily direction</span>
       </div>
 
-      <EditableList title="" initialItems={initialFocusItems} />
+      <EditableList
+        title=""
+        initialItems={initialFocusItems}
+        storageKey="atlas:dashboard:todays-focus:v1"
+      />
     </section>
   );
 }

@@ -1,17 +1,8 @@
-import SeatedGuest from "./SeatedGuest";
-import TableHeader from "./TableHeader";
 import TableVisual from "./TableVisual";
 
 function TableCard({
   table,
-  tables,
   getGuestById,
-  onUpdateName,
-  onRename,
-  onUpdateCapacity,
-  onUpdateShape,
-  onAssignGuest,
-  onRemoveGuest,
   dragging,
   onDragStart,
   onDrag,
